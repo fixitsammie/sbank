@@ -6,7 +6,7 @@ void main() {
 }
  final ButtonStyle RegisterButtonStyle = TextButton.styleFrom(
     foregroundColor: Colors.white,
-    minimumSize: const Size(88, 44),
+    minimumSize: const Size(150, 50),
     padding: const EdgeInsets.symmetric(horizontal: 16.0),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -16,7 +16,7 @@ void main() {
 
  final ButtonStyle LoginButtonStyle = TextButton.styleFrom(
     
-    minimumSize: const Size(88, 44),
+    minimumSize: const Size(150, 50),
     padding: const EdgeInsets.symmetric(horizontal: 16.0),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -40,32 +40,39 @@ class MainApp extends StatelessWidget {
                       "images/bg-spiral.png",
                       height: 200,
                     ),
-                  ),const Text("Banking made beautifully simple",style:TextStyle(fontSize: 50)), const SizedBox(height: 10.0),
-                        const Text("A modern design that elevates your banking journey. Manage your finances with flux."),
-     Row(mainAxisAlignment:MainAxisAlignment.center,children: [
-            
-                          TextButton(
-       style: LoginButtonStyle,
-          child: const Text("Log in",
-              style: TextStyle(fontWeight: FontWeight.w300)),
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/register');
-          },
-        ),
-        const SizedBox(width:20),
-           TextButton(
-       style: RegisterButtonStyle,
-          child: const Text("Register",
-              style: TextStyle(fontWeight: FontWeight.w300)),
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/register');
-          },
-        ),
-
-          ],),
-            const Center(
-              child: Text('Hello World!'),
-            ),
+                  ),Container(
+                     padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                       
+                      children: [
+                        const Text("Banking made beautifully simple",style:TextStyle(fontSize: 50, height:1.2,fontWeight: FontWeight.w500,)), const SizedBox(height: 10.0),
+                              const Text("A modern design that elevates your banking journey. Manage your finances with flux."),
+                              const SizedBox(height: 50.0),
+                             Row(mainAxisAlignment:MainAxisAlignment.center,children: [
+                                    
+                                TextButton(
+                               style: LoginButtonStyle,
+                                  child: const Text("Log in",
+                                      style: TextStyle(fontWeight: FontWeight.w300)),
+                                  onPressed: () {
+                                    Navigator.pushReplacementNamed(context, '/register');
+                                  },
+                                ),
+                                const SizedBox(width:20),
+                                   TextButton(
+                               style: RegisterButtonStyle,
+                                  child: const Text("Register",
+                                      style: TextStyle(fontWeight: FontWeight.w300)),
+                                  onPressed: () {
+                                    Navigator.pushReplacementNamed(context, '/register');
+                                  },
+                                ),
+                        
+                                  ],),
+                      ],
+                    ),
+                  ),
+           
           ],
         ),
       ),
