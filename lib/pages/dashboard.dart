@@ -31,17 +31,27 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+
   @override
   Widget build(BuildContext context) {
+      double Height = MediaQuery.of(context).size.height;
      return Scaffold(
         backgroundColor: primaryGreen,
         body: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Align(
                     alignment: Alignment.center,
-                    child: Image.asset(
-                      "images/bg-spiral.png",
-                      height: 200,
+                    child: Container(
+                      width:double.infinity,
+                      height:Height/2,
+                      child: FittedBox(
+                        child: Image.asset(
+                          "images/bg-spiral.png",
+                           fit:BoxFit.fill
+                          
+                         
+                        ),
+                      ),
                     ),
                   ),Container(
                      padding: const EdgeInsets.all(20.0),

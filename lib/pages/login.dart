@@ -84,7 +84,7 @@ final usernameField = TextFormField(
                   Align(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      "assets/images/catalogLogo.png",
+                      "images/bg-spiral.png",
                       height: 200,
                     ),
                   ),

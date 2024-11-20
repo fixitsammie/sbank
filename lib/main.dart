@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import 'package:sbank/pages/user_dashboard.dart';
 import 'package:sbank/pages/login.dart';
 import 'package:sbank/pages/register.dart';
 import 'package:sbank/pages/dashboard.dart';
@@ -14,10 +14,12 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
        routes: {
             '/': (context) => const Dashboard(),
             '/login': (context) => const Login(),
             '/register': (context) => const Register(),
+            '/home': (context) => const UserDashboard(),
             }
             );
   }

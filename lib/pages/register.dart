@@ -14,7 +14,15 @@ class _RegisterState extends State<Register> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(child:Container(
-      child: Text("Register"),
+      child: Column(
+        children: [
+          GestureDetector(onTap:(){
+            Navigator.pushReplacementNamed(context, '/home');
+          },
+          child: Text("User Dashboard")),
+          Text("Register"),
+        ],
+      ),
     )))
     );
   }
