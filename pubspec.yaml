@@ -10,6 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
   sliding_up_panel: ^2.0.0+1
+  flutter_stack_toast: ^0.0.2
+  http: ^1.2.2
+  shared_preferences: ^2.3.3
+  provider: ^6.1.2
   
 
   
@@ -26,3 +30,13 @@ flutter:
   assets:
     - assets/images/
     - assets/images/bg-spiral.png
+  
+  fonts:
+    - family: Satoshi
+      fonts:
+        - asset: assets/fonts/Satoshi-Regular.otf
+        - asset: assets/fonts/Satoshi-Black.otf
+        - asset: assets/fonts/Satoshi-Bold.otf
+        - asset: assets/fonts/Satoshi-Medium.otf
+        - asset: assets/fonts/Satoshi-Italic.otf
+       
