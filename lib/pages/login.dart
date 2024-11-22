@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../utils/widgets.dart';
+import '../util/widgets.dart';
+import '../constants.dart';
 
 class Login extends StatefulWidget {
-  const Login({ Key? key }) : super(key: key);
+  const Login({Key? key}) : super(key: key);
 
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-   final formKey = GlobalKey<FormState>();
-String _username = '', _password = '';
- final ButtonStyle flatButtonStyle = TextButton.styleFrom(
+  final formKey = GlobalKey<FormState>();
+  String _username = '', _password = '';
+  final ButtonStyle flatButtonStyle = TextButton.styleFrom(
     foregroundColor: Colors.white,
     minimumSize: const Size(88, 44),
     padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -24,7 +25,7 @@ String _username = '', _password = '';
 
   @override
   Widget build(BuildContext context) {
-final usernameField = TextFormField(
+    final usernameField = TextFormField(
       autofocus: false,
       validator: (value) =>
           value!.length < 8 ? "Username length is less than 8" : null,
@@ -70,7 +71,7 @@ final usernameField = TextFormField(
       ],
     );
 
-     return SafeArea(
+    return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
@@ -89,6 +90,8 @@ final usernameField = TextFormField(
                     ),
                   ),
                   const SizedBox(height: 10.0),
+                  Text("Login", style: pageHeader),
+                  const SizedBox(height: 10.0),
                   label("Username"),
                   const SizedBox(height: 5.0),
                   usernameField,
@@ -97,8 +100,8 @@ final usernameField = TextFormField(
                   const SizedBox(height: 5.0),
                   passwordField,
                   const SizedBox(height: 20.0),
-                
-                /**   auth.loggedInStatus == Status.Authenticating
+
+                  /**   auth.loggedInStatus == Status.Authenticating
                       ? loading
                       : longButtons("Login", doLogin,
                           color: const Color.fromRGBO(36, 36, 36, 1)),
@@ -111,6 +114,5 @@ final usernameField = TextFormField(
         ),
       ),
     );
-  
   }
 }

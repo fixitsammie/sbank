@@ -7,7 +7,7 @@ ElevatedButton longButtons(String title, Function fun,
     style: ElevatedButton.styleFrom(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(5))),
-      foregroundColor:  color,
+      foregroundColor: color,
       elevation: 2,
       fixedSize: const Size.fromHeight(52),
     ),
@@ -38,6 +38,7 @@ InputDecoration simpleInputDecoration(String hintText) {
   return InputDecoration(
     // hintText: hintText,
     contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
   );
 }

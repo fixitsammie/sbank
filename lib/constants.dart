@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+final Color primaryGreen = Color.fromRGBO(188, 251, 108, 1);
 
-
-final Color primaryGreen = Color(0xFFBCFB6C);
+TextStyle pageHeader =
+    const TextStyle(fontSize: 24, fontWeight: FontWeight.w600);
