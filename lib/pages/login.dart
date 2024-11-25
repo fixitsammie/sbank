@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_stack_toast/flutter_stack_toast.dart';
+import 'package:provider/provider.dart';
+import 'package:sbank/providers/auth.dart';
+import 'package:sbank/providers/user_provider.dart';
 
+import '../models/user.dart';
 import '../util/widgets.dart';
 import '../constants.dart';
 
@@ -20,11 +25,13 @@ class _LoginState extends State<Login> {
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(2.0)),
     ),
-    backgroundColor: const Color.fromRGBO(36, 36, 36, 1),
+    backgroundColor: const Color.fromARGB(255, 13, 139, 11),
   );
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context);
+
     final usernameField = TextFormField(
       autofocus: false,
       validator: (value) =>
@@ -52,24 +59,49 @@ class _LoginState extends State<Login> {
     final forgotLabel = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        TextButton(
-          style: flatButtonStyle,
+        GestureDetector(
           child: const Text("Forgot password?",
               style: TextStyle(fontWeight: FontWeight.w300)),
-          onPressed: () {
-//            Navigator.pushReplacementNamed(context, '/reset-password');
-          },
+          onTap: () {},
         ),
-        TextButton(
-          style: flatButtonStyle,
+        GestureDetector(
           child: const Text("Sign up",
               style: TextStyle(fontWeight: FontWeight.w300)),
-          onPressed: () {
+          onTap: () {
             Navigator.pushReplacementNamed(context, '/register');
           },
         ),
       ],
     );
+    doLogin() {
+      final form = formKey.currentState;
+
+      if (form != null && form.validate()) {
+        form.save();
+
+        final Future<Map<String, dynamic>> successfulMessage =
+            auth.login(_username, _password);
+
+        successfulMessage.then((response) {
+          if (response['status']) {
+            Navigator.pushReplacementNamed(context, '/dashboard');
+
+            User user = response['user'];
+            Provider.of<UserProvider>(context, listen: false).setUser(user);
+          } else {
+            FlutterToast.showStackTextToast(
+                context,
+                Text(response['message'].toString(),
+                    style: TextStyle(color: Colors.black, fontSize: 15)));
+          }
+        });
+      } else {
+        FlutterToast.showStackTextToast(
+            context,
+            Text("Invalid form",
+                style: TextStyle(color: Colors.black, fontSize: 15)));
+      }
+    }
 
     return SafeArea(
       child: Scaffold(
@@ -100,13 +132,11 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 5.0),
                   passwordField,
                   const SizedBox(height: 20.0),
-
-                  /**   auth.loggedInStatus == Status.Authenticating
+                  auth.loggedInStatus == Status.Authenticating
                       ? loading
-                      : longButtons("Login", doLogin,
-                          color: const Color.fromRGBO(36, 36, 36, 1)),
+                      : longButtons("Login", doLogin, color: authButtonColor),
                   const SizedBox(height: 5.0),
-                  forgotLabel*/
+                  forgotLabel
                 ],
               ),
             ),

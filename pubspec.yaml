@@ -30,13 +30,14 @@ flutter:
   assets:
     - assets/images/
     - assets/images/bg-spiral.png
+    - assets/images/logo.png
   
   fonts:
     - family: Satoshi
       fonts:
-        - asset: assets/fonts/Satoshi-Regular.otf
-        - asset: assets/fonts/Satoshi-Black.otf
-        - asset: assets/fonts/Satoshi-Bold.otf
-        - asset: assets/fonts/Satoshi-Medium.otf
-        - asset: assets/fonts/Satoshi-Italic.otf
+        - asset: assets/fonts/satoshi/Satoshi-Regular.otf
+        - asset: assets/fonts/satoshi/Satoshi-Black.otf
+        - asset: assets/fonts/satoshi/Satoshi-Bold.otf
+        - asset: assets/fonts/satoshi/Satoshi-Medium.otf
+        - asset: assets/fonts/satoshi/Satoshi-Italic.otf
        

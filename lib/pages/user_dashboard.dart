@@ -82,9 +82,11 @@ class _UserDashboardState extends State<UserDashboard> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("\$ 42.00",
+                      Text("\$ 42,012.25",
                           style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w600)),
+                              fontFamily: "Satoshi",
+                              fontSize: 30,
+                              fontWeight: FontWeight.w600)),
                       Wrap(
                         children: [
                           Container(

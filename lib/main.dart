@@ -7,6 +7,7 @@ import 'package:sbank/pages/login.dart';
 import 'package:sbank/pages/register.dart';
 import 'package:sbank/pages/dashboard.dart';
 import 'package:sbank/providers/auth.dart';
+import './theme.dart';
 
 void main() {
   runApp(const MainApp());
@@ -21,14 +22,17 @@ class MainApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
-      child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
-        '/': (context) => const Dashboard(),
-        '/login': (context) => const Login(),
-        '/register': (context) => const Register(),
-        '/local': (context) => const LocalPage(),
-        '/home': (context) => const UserDashboard(),
-        '/network': (context) => const Network(),
-      }),
+      child: MaterialApp(
+          theme: lightThemeDataCustom,
+          debugShowCheckedModeBanner: false,
+          routes: {
+            '/': (context) => const Dashboard(),
+            '/login': (context) => const Login(),
+            '/register': (context) => const Register(),
+            '/local': (context) => const LocalPage(),
+            '/home': (context) => const UserDashboard(),
+            '/network': (context) => const Network(),
+          }),
     );
   }
 }

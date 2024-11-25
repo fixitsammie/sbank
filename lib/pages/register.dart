@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sbank/constants.dart';
 import 'package:sbank/providers/auth.dart';
 import 'package:sbank/util/widgets.dart';
 import 'package:flutter_stack_toast/flutter_stack_toast.dart';
@@ -20,7 +21,7 @@ class _RegisterState extends State<Register> {
     minimumSize: const Size(88, 44),
     padding: const EdgeInsets.symmetric(horizontal: 16.0),
     shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(2.0)),
+      borderRadius: BorderRadius.all(Radius.circular(20.0)),
     ),
     backgroundColor: const Color.fromRGBO(36, 36, 36, 1),
   );
@@ -64,17 +65,15 @@ class _RegisterState extends State<Register> {
     final forgotLabel = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        TextButton(
-          style: flatButtonStyle,
+        GestureDetector(
           child: const Text("Forgot password?",
               style: TextStyle(fontWeight: FontWeight.w300)),
-          onPressed: () {},
+          onTap: () {},
         ),
-        TextButton(
-          style: flatButtonStyle,
+        GestureDetector(
           child: const Text("Sign in",
               style: TextStyle(fontWeight: FontWeight.w300)),
-          onPressed: () {
+          onTap: () {
             Navigator.pushReplacementNamed(context, '/login');
           },
         ),
@@ -123,14 +122,16 @@ class _RegisterState extends State<Register> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 80.0),
+                  const SizedBox(height: 20.0),
                   Align(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      "assets/images/sbankLogo.png",
-                      height: 200,
+                      "images/logo.png",
+                      height: 100,
                     ),
                   ),
+                  const SizedBox(height: 30.0),
+                  Text("Register", style: pageHeader),
                   const SizedBox(height: 10.0),
                   label("Username"),
                   const SizedBox(height: 5.0),
@@ -147,7 +148,7 @@ class _RegisterState extends State<Register> {
                   auth.registeredInStatus == Status.Registering
                       ? loading
                       : longButtons("Register", doRegister,
-                          color: const Color.fromRGBO(36, 36, 36, 1)),
+                          color: authButtonColor),
                   const SizedBox(height: 5.0),
                   forgotLabel,
                 ],
