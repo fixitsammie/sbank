@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sbank/widgets/bottom_navigation.dart';
 
 import '../constants.dart';
 import 'package:sbank/pages/login.dart';

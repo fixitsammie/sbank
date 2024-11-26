@@ -32,6 +32,9 @@ class MainApp extends StatelessWidget {
             '/local': (context) => const LocalPage(),
             '/home': (context) => const UserDashboard(),
             '/network': (context) => const Network(),
+            '/search': (context) => const Network(),
+            '/chat': (context) => const Network(),
+            '/settings': (context) => const Network(),
           }),
     );
   }

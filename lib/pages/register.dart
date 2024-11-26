@@ -148,7 +148,7 @@ class _RegisterState extends State<Register> {
                   auth.registeredInStatus == Status.Registering
                       ? loading
                       : longButtons("Register", doRegister,
-                          color: authButtonColor),
+                          color: primaryGreen, textColor: authButtonTextColor),
                   const SizedBox(height: 5.0),
                   forgotLabel,
                 ],

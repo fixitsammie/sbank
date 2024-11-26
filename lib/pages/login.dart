@@ -134,9 +134,17 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 20.0),
                   auth.loggedInStatus == Status.Authenticating
                       ? loading
-                      : longButtons("Login", doLogin, color: authButtonColor),
+                      : longButtons("Login", doLogin,
+                          color: primaryGreen, textColor: authButtonTextColor),
                   const SizedBox(height: 5.0),
-                  forgotLabel
+                  forgotLabel,
+                  GestureDetector(
+                    child: const Text("Home",
+                        style: TextStyle(fontWeight: FontWeight.w300)),
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, '/home');
+                    },
+                  ),
                 ],
               ),
             ),
