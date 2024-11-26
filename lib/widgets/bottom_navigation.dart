@@ -25,7 +25,7 @@ class MyBottomNavBar extends State<Mybottom> {
         break;
 
       case 1:
-        _url = '/search';
+        _url = '/help';
         break;
 
       case 2:
@@ -42,6 +42,7 @@ class MyBottomNavBar extends State<Mybottom> {
   Widget build(BuildContext context) {
     _selectedIndex = widget.num;
     return BottomNavigationBar(
+      backgroundColor: navBarBackgroundColor,
       type: BottomNavigationBarType.fixed,
       selectedItemColor: activeBottomNavColor,
       unselectedItemColor: inactiveBottomNavColor,
@@ -60,8 +61,9 @@ class MyBottomNavBar extends State<Mybottom> {
       selectedIconTheme: IconThemeData(color: activeBottomNavColor),
       items: const [
         BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
-        BottomNavigationBarItem(label: "Search", icon: Icon(Icons.search)),
-        BottomNavigationBarItem(label: "Chat", icon: Icon(Icons.forum)),
+        BottomNavigationBarItem(
+            label: "Statistics", icon: Icon(Icons.bar_chart)),
+        BottomNavigationBarItem(label: "Support", icon: Icon(Icons.forum)),
         BottomNavigationBarItem(label: "Settings", icon: Icon(Icons.settings)),
       ],
       currentIndex: _selectedIndex,

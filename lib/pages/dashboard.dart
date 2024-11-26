@@ -62,10 +62,10 @@ class _DashboardState extends State<Dashboard> {
                       height: 1.2,
                       fontWeight: FontWeight.w500,
                     )),
-                const SizedBox(height: 10.0),
+                const SizedBox(height: 50.0),
                 const Text(
                     "A modern design that elevates your banking journey. Manage your finances with flux."),
-                const SizedBox(height: 50.0),
+                const SizedBox(height: 20.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

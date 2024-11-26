@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "681772466130",
+    "project_id": "nubank-98f35",
+    "storage_bucket": "nubank-98f35.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681772466130:android:f4d27bc437b61deffe120b",
+        "android_client_info": {
+          "package_name": "com.example.nubank"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6g41UeeCgyOinCUy3VlKdSM1yBOBEI_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681772466130:android:6076f66c4720c881fe120b",
+        "android_client_info": {
+          "package_name": "com.example.sbank"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6g41UeeCgyOinCUy3VlKdSM1yBOBEI_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

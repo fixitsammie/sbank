@@ -17,6 +17,7 @@ class UserDashboard extends StatefulWidget {
 
 class _UserDashboardState extends State<UserDashboard> {
   PanelController _pc = new PanelController();
+  final Color bankCardLight = Color(0xFF94c556);
 
   @override
   Widget build(BuildContext context) {
@@ -87,11 +88,20 @@ class _UserDashboardState extends State<UserDashboard> {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("\$ 42,012.25",
-                              style: TextStyle(
-                                  fontFamily: "Satoshi",
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w600)),
+                          Text.rich(
+                            style: TextStyle(
+                                fontFamily: "Satoshi",
+                                fontSize: 30,
+                                fontWeight: FontWeight.w600),
+                            TextSpan(
+                                text: '\$ 42,012',
+                                children: const <TextSpan>[
+                                  TextSpan(
+                                    text: '.25',
+                                    style: TextStyle(color: Color(0xFFcbcbcb)),
+                                  )
+                                ]),
+                          ),
                           Wrap(
                             children: [
                               Container(
@@ -99,7 +109,7 @@ class _UserDashboardState extends State<UserDashboard> {
                                 height: 40,
                                 width: 40,
                                 decoration: BoxDecoration(
-                                  color: Colors.grey[200],
+                                  color: Color(0xFFf2f2f2),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Center(
@@ -116,7 +126,7 @@ class _UserDashboardState extends State<UserDashboard> {
                                 height: 40,
                                 width: 40,
                                 decoration: BoxDecoration(
-                                  color: Colors.grey[200],
+                                  color: Color(0xFFf2f2f2),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Center(
@@ -161,13 +171,12 @@ class _UserDashboardState extends State<UserDashboard> {
                               ],
                             ),
                             SizedBox(height: 20),
-                            Text(
-                              "Debit Card",
-                              style: TextStyle(
+                            Text("Debit Card",
+                                style: TextStyle(
                                   fontWeight: FontWeight.w800,
                                   fontSize: 20,
-                                  color: Colors.brown[50]),
-                            ),
+                                  color: bankCardLight,
+                                )),
                             Text(
                               "1423 2832 8398 8432 ",
                               style: TextStyle(
@@ -179,11 +188,11 @@ class _UserDashboardState extends State<UserDashboard> {
                               children: [
                                 Text(
                                   "Name",
-                                  style: TextStyle(color: Colors.brown[100]),
+                                  style: TextStyle(color: bankCardLight),
                                 ),
                                 Text(
                                   "Exp Date",
-                                  style: TextStyle(color: Colors.brown[100]),
+                                  style: TextStyle(color: bankCardLight),
                                 ),
                               ],
                             ),
