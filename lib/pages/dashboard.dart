@@ -38,60 +38,62 @@ class _DashboardState extends State<Dashboard> {
     double Height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: primaryGreen,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: Height / 2,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(
-                    "images/bg-spiral.png",
-                  )),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                const Text("Banking made beautifully simple",
-                    style: TextStyle(
-                      fontSize: 50,
-                      height: 1.2,
-                      fontWeight: FontWeight.w500,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: Height / 2,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage(
+                      "assets/images/bg-spiral.png",
                     )),
-                const SizedBox(height: 50.0),
-                const Text(
-                    "A modern design that elevates your banking journey. Manage your finances with flux."),
-                const SizedBox(height: 20.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      style: LoginButtonStyle,
-                      child: const Text("Log in",
-                          style: TextStyle(fontWeight: FontWeight.w300)),
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/login');
-                      },
-                    ),
-                    const SizedBox(width: 20),
-                    TextButton(
-                      style: RegisterButtonStyle,
-                      child: const Text("Register",
-                          style: TextStyle(fontWeight: FontWeight.w300)),
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/register');
-                      },
-                    ),
-                  ],
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+            Container(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  const Text("Banking made beautifully simple",
+                      style: TextStyle(
+                        fontSize: 45,
+                        height: 1.2,
+                        fontWeight: FontWeight.w500,
+                      )),
+                  const SizedBox(height: 20.0),
+                  const Text(
+                      "A modern design that elevates your banking journey. Manage your finances with flux."),
+                  const SizedBox(height: 20.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        style: LoginButtonStyle,
+                        child: const Text("Log in",
+                            style: TextStyle(fontWeight: FontWeight.w300)),
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/login');
+                        },
+                      ),
+                      const SizedBox(width: 20),
+                      TextButton(
+                        style: RegisterButtonStyle,
+                        child: const Text("Register",
+                            style: TextStyle(fontWeight: FontWeight.w300)),
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/register');
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

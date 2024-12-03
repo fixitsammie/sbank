@@ -32,8 +32,7 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/images/bg-spiral.png
-    - assets/images/logo.png
+   
   
   fonts:
     - family: Satoshi

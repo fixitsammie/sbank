@@ -78,7 +78,7 @@ class _UserDashboardState extends State<UserDashboard> {
                           CircleAvatar(
                             radius: 20,
                             backgroundImage: AssetImage(
-                              "images/ella.jpg",
+                              "assets/images/ella.jpg",
                             ),
                           ),
                         ]),
@@ -155,7 +155,7 @@ class _UserDashboardState extends State<UserDashboard> {
                                 SizedBox(
                                   width: 40,
                                   child: Image.asset(
-                                    "images/mastercard-black.png",
+                                    "assets/images/mastercard-black.png",
                                   ),
                                 ),
                                 Transform.rotate(

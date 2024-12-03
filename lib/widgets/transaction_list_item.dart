@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sbank/local_data/transactions.dart';
 
 Widget TransactionListItem(BuildContext context, int index) {
   return Padding(
@@ -10,10 +11,12 @@ Widget TransactionListItem(BuildContext context, int index) {
           SizedBox(width: 20),
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text("Name"), Text("Subtitle")]),
+              children: [Text( TRANSACTIONS[index].name,), 
+              
+              Text(TRANSACTIONS[index].subtitle)]),
         ],
       ),
-      Text("400")
+       Text(TRANSACTIONS[index].amount.toString())
     ]),
   );
 }

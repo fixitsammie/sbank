@@ -117,7 +117,7 @@ class _LoginState extends State<Login> {
                   Align(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      "images/bg-spiral.png",
+                      "assets/images/bg-spiral.png",
                       height: 200,
                     ),
                   ),

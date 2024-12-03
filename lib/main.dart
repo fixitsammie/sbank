@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sbank/firebase_options.dart';
+import 'package:sbank/firebase_options1.dart';
 import 'package:sbank/pages/help.dart';
 import 'package:sbank/pages/homepage.dart';
 import 'package:sbank/pages/localpage.dart';
@@ -13,13 +13,14 @@ import 'package:sbank/pages/dashboard.dart';
 import 'package:sbank/providers/auth.dart';
 import './theme.dart';
 
-void main() async {
+void main3() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MainApp());
 }
+void main(){runApp(const MainApp());}
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -34,7 +35,8 @@ class MainApp extends StatelessWidget {
           // theme: lightThemeDataCustom,
           debugShowCheckedModeBanner: false,
           routes: {
-            '/': (context) => const AuthGate(),
+            '/': (context) => const Dashboard(),
+            '/a': (context) => const AuthGate(),
             '/login': (context) => const Login(),
             '/register': (context) => const Register(),
             '/local': (context) => const LocalPage(),

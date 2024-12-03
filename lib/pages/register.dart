@@ -126,7 +126,7 @@ class _RegisterState extends State<Register> {
                   Align(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      "images/logo.png",
+                      'assets/images/logo.png',
                       height: 100,
                     ),
                   ),
