@@ -36,9 +36,16 @@ class _UserDashboardState extends State<UserDashboard> {
             maxHeight: 700,
             controller: _pc,
             panel: Container(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.only(top:10,left:20,right:20,bottom:20),
               child: Column(
                 children: [
+                  Row(crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                Container(height:5,width:40,decoration: BoxDecoration(color: Colors.grey,borderRadius: BorderRadius.circular(20),))
+                    ]
+                  ),
+                  SizedBox(height:10),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

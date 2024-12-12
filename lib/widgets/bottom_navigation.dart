@@ -29,7 +29,7 @@ class MyBottomNavBar extends State<Mybottom> {
         break;
 
       case 2:
-        _url = '/cart';
+        _url = '/settings';
         break;
 
       default:
