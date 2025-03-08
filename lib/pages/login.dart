@@ -17,6 +17,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final formKey = GlobalKey<FormState>();
+   bool isLoading = false;
   String _username = '', _password = '';
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
     foregroundColor: Colors.white,
@@ -73,34 +74,37 @@ class _LoginState extends State<Login> {
         ),
       ],
     );
-    doLogin() {
+    handleLogin() async{
       final form = formKey.currentState;
 
       if (form != null && form.validate()) {
         form.save();
 
-        final Future<Map<String, dynamic>> successfulMessage =
-            auth.login(_username, _password);
+      
 
-        successfulMessage.then((response) {
-          if (response['status']) {
-            Navigator.pushReplacementNamed(context, '/dashboard');
+       
+      
+    setState(() => isLoading = true);
 
-            User user = response['user'];
-            Provider.of<UserProvider>(context, listen: false).setUser(user);
-          } else {
-            FlutterToast.showStackTextToast(
-                context,
-                Text(response['message'].toString(),
-                    style: TextStyle(color: Colors.black, fontSize: 15)));
-          }
-        });
-      } else {
-        FlutterToast.showStackTextToast(
-            context,
-            Text("Invalid form",
-                style: TextStyle(color: Colors.black, fontSize: 15)));
-      }
+     String? errorMessage = await auth.login(
+      _username,
+      _password
+    
+    );
+
+    setState(() => isLoading = false);
+
+    if (errorMessage == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Login successful!")),
+      );
+      // Navigate to another screen if needed
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage)),
+      );
+    }
+  }
     }
 
     return SafeArea(
@@ -134,7 +138,7 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 20.0),
                   auth.loggedInStatus == Status.Authenticating
                       ? loading
-                      : longButtons("Login", doLogin,
+                      : longButtons("Login", handleLogin,
                           color: primaryGreen, textColor: authButtonTextColor),
                   const SizedBox(height: 5.0),
                   forgotLabel,

@@ -14,6 +14,7 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   String _username = '', _password = '', _confirmPassword = '';
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
@@ -80,37 +81,31 @@ class _RegisterState extends State<Register> {
       ],
     );
 
-    doRegister() {
+    handleRegister() async{
       final form = formKey.currentState;
       if (form != null && form.validate()) {
         form.save();
-        auth
-            .register(_username, _password, _confirmPassword)
-            .then((response) async {
-          if (response['status']) {
-            // User user = response['data'];
-            // Provider.of<UserProvider>(context, listen: false).setUser(user);
-            Navigator.pushReplacementNamed(context, '/login');
-            //bool result = await Navigator.of(context).pushNamed(context,'/login');
 
-            FlutterToast.showStackTextToast(
-                context,
-                Text("New account created",
-                    style: TextStyle(color: Colors.black, fontSize: 15)));
-          } else {
-            FlutterToast.showStackTextToast(
-                context,
-                Text(response['message'].toString(),
-                    style: TextStyle(color: Colors.black, fontSize: 15)));
-          }
-        });
-      } else {
-        FlutterToast.showStackTextToast(
-            context,
-            Text("Invalid form",
-                style: TextStyle(color: Colors.black, fontSize: 15)));
-      }
+       
+
+      setState(() => isLoading = true);
+
+    String? errorMessage = await auth.register(
+      _username,_password
+    );
+
+    setState(() => isLoading = false);
+
+    if (errorMessage == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("User registered successfully!")),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage)),
+      );
     }
+    }}
 
     return SafeArea(
       child: Scaffold(
@@ -147,7 +142,7 @@ class _RegisterState extends State<Register> {
                   const SizedBox(height: 20.0),
                   auth.registeredInStatus == Status.Registering
                       ? loading
-                      : longButtons("Register", doRegister,
+                      : longButtons("Register", handleRegister,
                           color: primaryGreen, textColor: authButtonTextColor),
                   const SizedBox(height: 5.0),
                   forgotLabel,
