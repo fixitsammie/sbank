@@ -31,6 +31,9 @@ class MyBottomNavBar extends State<Mybottom> {
       case 2:
         _url = '/settings';
         break;
+         case 3:
+        _url = '/settings';
+        break;
 
       default:
         _url = '/dashboard';

@@ -2,15 +2,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sbank/firebase_options1.dart';
+import 'package:sbank/pages/authguard.dart';
 import 'package:sbank/pages/help.dart';
 import 'package:sbank/pages/homepage.dart';
 import 'package:sbank/pages/localpage.dart';
 import 'package:sbank/pages/network.dart';
+import 'package:sbank/pages/settings.dart';
 import 'package:sbank/pages/user_dashboard.dart';
 import 'package:sbank/pages/login.dart';
 import 'package:sbank/pages/register.dart';
 import 'package:sbank/pages/dashboard.dart';
 import 'package:sbank/providers/auth.dart';
+
 import './theme.dart';
 
 void main() async {
@@ -20,7 +23,7 @@ void main() async {
   );
   runApp(const MainApp());
 }
-//void main3({runApp(const MainApp());}
+
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -35,7 +38,7 @@ class MainApp extends StatelessWidget {
           // theme: lightThemeDataCustom,
           debugShowCheckedModeBanner: false,
           routes: {
-            '/': (context) => const Dashboard(),
+            '/': (context) =>  AuthGuard(),
             '/dashboard': (context) => const Dashboard(),
             '/a': (context) => const AuthGate(),
             '/login': (context) => const Login(),
@@ -45,7 +48,7 @@ class MainApp extends StatelessWidget {
             '/network': (context) => const Network(),
             '/search': (context) => const Network(),
             '/chat': (context) => const Network(),
-            '/settings': (context) => const Network(),
+            '/settings': (context) => const Settings(),
             '/help': (context) => const Help(),
           }),
     );

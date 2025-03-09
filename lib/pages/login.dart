@@ -18,7 +18,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final formKey = GlobalKey<FormState>();
    bool isLoading = false;
-  String _username = '', _password = '';
+  String _email = '', _password = '';
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
     foregroundColor: Colors.white,
     minimumSize: const Size(88, 44),
@@ -33,11 +33,13 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     AuthProvider auth = Provider.of<AuthProvider>(context);
 
-    final usernameField = TextFormField(
+    final emailField = TextFormField(
       autofocus: false,
       validator: (value) =>
-          value!.length < 8 ? "Username length is less than 8" : null,
-      onSaved: (value) => _username = value.toString(),
+      !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(value.toString()) ? "Invalid email"
+          : null,
+      onSaved: (value) => _email = value.toString(),
       decoration: simpleInputDecoration("Confirm password"),
     );
 
@@ -87,7 +89,7 @@ class _LoginState extends State<Login> {
     setState(() => isLoading = true);
 
      String? errorMessage = await auth.login(
-      _username,
+      _email,
       _password
     
     );
@@ -98,11 +100,14 @@ class _LoginState extends State<Login> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Login successful!")),
       );
-      // Navigate to another screen if needed
+        Future.delayed(Duration(seconds: 2), () { Navigator.pushReplacementNamed(context, '/home');
+         }); 
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(errorMessage)),
       );
+     
+    
     }
   }
     }
@@ -128,9 +133,9 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 10.0),
                   Text("Login", style: pageHeader),
                   const SizedBox(height: 10.0),
-                  label("Username"),
+                  label("Email"),
                   const SizedBox(height: 5.0),
-                  usernameField,
+                  emailField,
                   const SizedBox(height: 20.0),
                   label("Password"),
                   const SizedBox(height: 5.0),
@@ -142,13 +147,7 @@ class _LoginState extends State<Login> {
                           color: primaryGreen, textColor: authButtonTextColor),
                   const SizedBox(height: 5.0),
                   forgotLabel,
-                  GestureDetector(
-                    child: const Text("Home",
-                        style: TextStyle(fontWeight: FontWeight.w300)),
-                    onTap: () {
-                      Navigator.pushReplacementNamed(context, '/home');
-                    },
-                  ),
+                 
                 ],
               ),
             ),

@@ -8,7 +8,7 @@ import 'package:http/http.dart';
 import 'package:sbank/util/app_url.dart';
 import 'package:sbank/util/shared_preference.dart';
 import 'package:sbank/user_preferences.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 enum Status {
@@ -29,7 +29,20 @@ class AuthProvider with ChangeNotifier {
   Status get registeredInStatus => _registeredInStatus;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+User? _user;
 
+
+  AuthProvider() {
+    _auth.authStateChanges().listen((user) {
+      _user = user;
+      notifyListeners(); // Notify UI about changes
+    });
+  }
+
+   User? get user => _user;
+
+  bool get isAuthenticated => _user != null;
   // Login User
   Future<String?> login(String email, String password) async {
     try {
@@ -37,7 +50,8 @@ class AuthProvider with ChangeNotifier {
         email: email.trim(),
         password: password.trim(),
       );
-      return null; // Success
+      
+            return null; // Success
     } on FirebaseAuthException catch (e) {
       return e.message; // Return error message
     }
@@ -54,7 +68,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<String?> register(
-      String email, String password) async{
+    String name,  String email, String password) async{
  
 
     _registeredInStatus = Status.Registering;
@@ -62,12 +76,24 @@ class AuthProvider with ChangeNotifier {
 
   
     try {
-      await _auth.createUserWithEmailAndPassword(
-        email: email.trim(),
-        password: password.trim(),
+     UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
       );
+
+       User? user = userCredential.user;
+
+      if (user != null) {
+        await _firestore.collection("users").doc(user.uid).set({
+          "uid": user.uid,
+          "name": name,
+          "email": email,
+          "createdAt": FieldValue.serverTimestamp(),
+        });}
+      _registeredInStatus = Status.Registered;
       return null; // Success
     } on FirebaseAuthException catch (e) {
+      _registeredInStatus = Status.NotRegistered;
       return e.message; // Return error message
     }
   

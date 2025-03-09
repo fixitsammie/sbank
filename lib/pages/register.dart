@@ -16,7 +16,7 @@ class _RegisterState extends State<Register> {
   final formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
-  String _username = '', _password = '', _confirmPassword = '';
+  String _name='', _email = '', _password = '', _confirmPassword = '';
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
     foregroundColor: Colors.white,
     minimumSize: const Size(88, 44),
@@ -31,13 +31,25 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     AuthProvider auth = Provider.of<AuthProvider>(context);
 
-    final usernameField = TextFormField(
+ final nameField = TextFormField(
       autofocus: false,
       validator: (value) =>
-          value!.length < 8 ? "Username length is less than 8" : null,
-      onSaved: (value) => _username = value.toString(),
+          value!.length < 3 ? "Username length is less than 3" : null,
+      onSaved: (value) => _name = value.toString(),
       decoration: simpleInputDecoration("Confirm password"),
     );
+    final emailField = TextFormField(
+      autofocus: false,
+      validator: (value) =>
+      !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(value.toString()) ? "Invalid email"
+          : null,
+      onSaved: (value) => _email = value.toString(),
+      decoration: simpleInputDecoration("Confirm password"),
+    );
+
+
+  
 
     final passwordField = TextFormField(
       autofocus: false,
@@ -91,7 +103,7 @@ class _RegisterState extends State<Register> {
       setState(() => isLoading = true);
 
     String? errorMessage = await auth.register(
-      _username,_password
+      _name,_email,_password
     );
 
     setState(() => isLoading = false);
@@ -100,6 +112,8 @@ class _RegisterState extends State<Register> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("User registered successfully!")),
       );
+      Future.delayed(Duration(seconds: 2), () { Navigator.pushReplacementNamed(context, '/login');
+         });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(errorMessage)),
@@ -128,9 +142,13 @@ class _RegisterState extends State<Register> {
                   const SizedBox(height: 30.0),
                   Text("Register", style: pageHeader),
                   const SizedBox(height: 10.0),
-                  label("Username"),
+                   label("Full Name"),
                   const SizedBox(height: 5.0),
-                  usernameField,
+                  nameField,
+                  const SizedBox(height: 15.0),
+                  label("Email"),
+                  const SizedBox(height: 5.0),
+                  emailField,
                   const SizedBox(height: 15.0),
                   label("Password"),
                   const SizedBox(height: 10.0),
