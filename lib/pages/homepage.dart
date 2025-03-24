@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sbank/pages/dashboard.dart';
 import 'package:sbank/pages/user_dashboard.dart';
@@ -14,7 +13,7 @@ class AuthGate extends StatelessWidget {
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Dashboard();
-           //return const UserDashboard();
+          //return const UserDashboard();
         }
         return const UserDashboard();
       },

@@ -18,30 +18,27 @@ class MyBottomNavBar extends State<Mybottom> {
       _selectedIndex = index;
     });
 
-    var _url;
+    var url = '/';
     switch (_selectedIndex) {
       case 0:
-        _url = '/';
+        url = '/';
         break;
 
       case 1:
-        _url = '/stats';
+        url = '/stats';
         break;
 
       case 2:
-        _url = '/support';
+        url = '/support';
         break;
-         case 3:
-        _url = '/settings';
+      case 3:
+        url = '/settings';
         break;
 
       default:
-        _url = '/';
+        url = '/';
     }
-    Navigator.pushReplacementNamed(context, _url);
-
-
-
+    Navigator.pushReplacementNamed(context, url);
   }
 
   @override
@@ -54,17 +51,17 @@ class MyBottomNavBar extends State<Mybottom> {
       unselectedItemColor: inactiveBottomNavColor,
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      unselectedLabelStyle: TextStyle(
+      unselectedLabelStyle: const TextStyle(
         color: inactiveBottomNavColor,
         fontSize: 10,
         fontWeight: FontWeight.w400,
       ),
-      selectedLabelStyle: TextStyle(
+      selectedLabelStyle: const TextStyle(
         color: activeBottomNavColor,
         fontSize: 10,
         fontWeight: FontWeight.w700,
       ),
-      selectedIconTheme: IconThemeData(color: activeBottomNavColor),
+      selectedIconTheme: const IconThemeData(color: activeBottomNavColor),
       items: const [
         BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
         BottomNavigationBarItem(

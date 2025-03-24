@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sbank/widgets/bottom_navigation.dart';
-
 import '../constants.dart';
-import 'package:sbank/pages/login.dart';
-import 'package:sbank/pages/dashboard.dart';
 
-final ButtonStyle RegisterButtonStyle = TextButton.styleFrom(
+final ButtonStyle registerButtonStyle = TextButton.styleFrom(
   foregroundColor: Colors.white,
   minimumSize: const Size(150, 50),
   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -15,7 +11,7 @@ final ButtonStyle RegisterButtonStyle = TextButton.styleFrom(
   backgroundColor: const Color.fromRGBO(36, 36, 36, 1),
 );
 
-final ButtonStyle LoginButtonStyle = TextButton.styleFrom(
+final ButtonStyle loginButtonStyle = TextButton.styleFrom(
   minimumSize: const Size(150, 50),
   padding: const EdgeInsets.symmetric(horizontal: 16.0),
   shape: const RoundedRectangleBorder(
@@ -26,7 +22,7 @@ final ButtonStyle LoginButtonStyle = TextButton.styleFrom(
 );
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  const Dashboard({super.key});
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -35,7 +31,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    double Height = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: primaryGreen,
       body: SafeArea(
@@ -44,8 +40,8 @@ class _DashboardState extends State<Dashboard> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: Height / 2,
-              decoration: BoxDecoration(
+              height: height / 2,
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage(
@@ -71,7 +67,7 @@ class _DashboardState extends State<Dashboard> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                        style: LoginButtonStyle,
+                        style: loginButtonStyle,
                         child: const Text("Log in",
                             style: TextStyle(fontWeight: FontWeight.w300)),
                         onPressed: () {
@@ -80,7 +76,7 @@ class _DashboardState extends State<Dashboard> {
                       ),
                       const SizedBox(width: 20),
                       TextButton(
-                        style: RegisterButtonStyle,
+                        style: registerButtonStyle,
                         child: const Text("Register",
                             style: TextStyle(fontWeight: FontWeight.w300)),
                         onPressed: () {

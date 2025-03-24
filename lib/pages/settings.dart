@@ -10,18 +10,18 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
-      bottomNavigationBar: Mybottom(num: 3),
-      body:SafeArea(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [
-       
-       Center(child:LogoutButton()),
-        
-      ],),)
-    );
+        bottomNavigationBar: Mybottom(num: 3),
+        body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(child: LogoutButton()),
+            ],
+          ),
+        ));
   }
 }
-
 
 class LogoutButton extends StatefulWidget {
   @override
@@ -33,17 +33,14 @@ class _LogoutButtonState extends State<LogoutButton> {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     await authProvider.logoutUser();
 
-    if (mounted) { // ✅ No import needed, built-in for StatefulWidget
+    if (mounted) {
+      // ✅ No import needed, built-in for StatefulWidget
       Navigator.pushReplacementNamed(context, '/login');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
-    return   const Text("Logout",
-                                    style: TextStyle(fontWeight: FontWeight.w300));
-   
-   
+    return const Text("Logout", style: TextStyle(fontWeight: FontWeight.w300));
   }
 }

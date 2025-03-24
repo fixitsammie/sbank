@@ -15,8 +15,6 @@ import 'package:sbank/pages/register.dart';
 import 'package:sbank/pages/dashboard.dart';
 import 'package:sbank/providers/auth.dart';
 
-import './theme.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -24,7 +22,6 @@ void main() async {
   );
   runApp(const MainApp());
 }
-
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -39,7 +36,7 @@ class MainApp extends StatelessWidget {
           // theme: lightThemeDataCustom,
           debugShowCheckedModeBanner: false,
           routes: {
-            '/': (context) =>  AuthGuard(),
+            '/': (context) => const AuthGuard(),
             '/dashboard': (context) => const Dashboard(),
             '/a': (context) => const AuthGate(),
             '/login': (context) => const Login(),

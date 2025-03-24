@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_stack_toast/flutter_stack_toast.dart';
 import 'package:provider/provider.dart';
 import 'package:sbank/providers/auth.dart';
-import 'package:sbank/providers/user_provider.dart';
 
-import '../models/user.dart';
 import '../util/widgets.dart';
 import '../constants.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  const Login({super.key});
 
   @override
   _LoginState createState() => _LoginState();
@@ -17,7 +14,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final formKey = GlobalKey<FormState>();
-   bool isLoading = false;
+  bool isLoading = false;
   String _email = '', _password = '';
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
     foregroundColor: Colors.white,
@@ -36,9 +33,10 @@ class _LoginState extends State<Login> {
     final emailField = TextFormField(
       autofocus: false,
       validator: (value) =>
-      !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-      .hasMatch(value.toString()) ? "Invalid email"
-          : null,
+          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                  .hasMatch(value.toString())
+              ? "Invalid email"
+              : null,
       onSaved: (value) => _email = value.toString(),
       decoration: simpleInputDecoration("Confirm password"),
     );
@@ -51,9 +49,9 @@ class _LoginState extends State<Login> {
       decoration: simpleInputDecoration("Confirm password"),
     );
 
-    var loading = Row(
+    var loading = const Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const <Widget>[
+      children: <Widget>[
         CircularProgressIndicator(),
         Text(" Authenticating ... Please wait")
       ],
@@ -76,40 +74,33 @@ class _LoginState extends State<Login> {
         ),
       ],
     );
-    handleLogin() async{
+    handleLogin() async {
       final form = formKey.currentState;
 
       if (form != null && form.validate()) {
         form.save();
 
-      
+        setState(() => isLoading = true);
 
-       
-      
-    setState(() => isLoading = true);
+        String? errorMessage = await auth.login(_email, _password);
 
-     String? errorMessage = await auth.login(
-      _email,
-      _password
-    
-    );
+        setState(() => isLoading = false);
 
-    setState(() => isLoading = false);
+        if (errorMessage == null) {
+          Future.delayed(const Duration(seconds: 2), () {});
+          if (mounted) {
+            await Navigator.pushReplacementNamed(context, '/home');
 
-    if (errorMessage == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Login successful!")),
-      );
-        Future.delayed(Duration(seconds: 2), () { Navigator.pushReplacementNamed(context, '/home');
-         }); 
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(errorMessage)),
-      );
-     
-    
-    }
-  }
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: const Text("Login successful!")),
+            );
+          }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(errorMessage)),
+          );
+        }
+      }
     }
 
     return SafeArea(
@@ -147,7 +138,6 @@ class _LoginState extends State<Login> {
                           color: primaryGreen, textColor: authButtonTextColor),
                   const SizedBox(height: 5.0),
                   forgotLabel,
-                 
                 ],
               ),
             ),

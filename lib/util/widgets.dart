@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ElevatedButton longButtons(String title, Function fun,
-    {Color color = const Color(0xfff063057),
+    {Color color = const Color(0xff063057),
     Color textColor = const Color.fromRGBO(0, 0, 0, 1)}) {
   return ElevatedButton(
     onPressed: () => fun(),
@@ -42,22 +42,22 @@ InputDecoration simpleInputDecoration(String hintText) {
 
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
 
-    focusedBorder: OutlineInputBorder(
+    focusedBorder: const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(30.0)),
       borderSide: BorderSide(width: 1, color: Colors.green),
     ),
-    disabledBorder: OutlineInputBorder(
+    disabledBorder: const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(30.0)),
       borderSide: BorderSide(width: 1, color: Colors.orange),
     ),
-    enabledBorder: OutlineInputBorder(
+    enabledBorder: const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(30.0)),
       borderSide: BorderSide(width: 1, color: Colors.green),
     ),
-    errorBorder: OutlineInputBorder(
+    errorBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(30.0)),
         borderSide: BorderSide(width: 1, color: Colors.black)),
-    focusedErrorBorder: OutlineInputBorder(
+    focusedErrorBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(30.0)),
         borderSide: BorderSide(width: 1, color: Colors.yellowAccent)),
   );

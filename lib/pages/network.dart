@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Network extends StatelessWidget {
-  const Network({Key? key}) : super(key: key);
+  const Network({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +13,9 @@ class Network extends StatelessWidget {
           color: Colors.black,
         ),
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: const BorderRadius.only(
+            borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(20), // Bottom left corner
               bottomRight: Radius.circular(20),
             ),

@@ -1,233 +1,82 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:sbank/widgets/transaction_list_item.dart';
-import 'dart:math' as math;
+import 'package:sbank/pages/screens/stats_screen.dart';
+import 'package:sbank/pages/screens/support_screen.dart';
 
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:sbank/constants.dart';
-import 'package:sbank/widgets/bottom_navigation.dart';
+
+import 'screens/home_screen.dart';
+import 'screens/profile_screen.dart';
+import 'screens/settings_screen.dart';
+import '../constants.dart';
 
 class UserDashboard extends StatefulWidget {
-  const UserDashboard({Key? key}) : super(key: key);
+  final int selectedIndex;
 
+  const UserDashboard({Key? key, this.selectedIndex = 0}) : super(key: key);
   @override
   _UserDashboardState createState() => _UserDashboardState();
 }
 
 class _UserDashboardState extends State<UserDashboard> {
-  PanelController _pc = new PanelController();
-  final Color bankCardLight = Color(0xFF94c556);
+  late int _selectedIndex;
+
+  final List<String> _routes = ['/home', '/profile', '/settings'];
+
+  final List<Widget> _screens = const [
+    HomeScreen(),
+    StatsScreen(),
+    SupportScreen(),
+    SettingsScreen(),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex =
+        widget.selectedIndex; // Set initial index from the passed argument
+  }
 
   @override
   Widget build(BuildContext context) {
-    const String fullName = "Ella star";
-    BorderRadiusGeometry radius = BorderRadius.only(
-      topLeft: Radius.circular(24.0),
-      topRight: Radius.circular(24.0),
-    );
-
     return Scaffold(
-        bottomNavigationBar: Mybottom(num: 0),
-        body: SafeArea(
-          child: SlidingUpPanel(
-            backdropEnabled: true,
-            minHeight: 200,
-            maxHeight: 700,
-            controller: _pc,
-            panel: Container(
-              padding: EdgeInsets.only(top:10,left:20,right:20,bottom:20),
-              child: Column(
-                children: [
-                  Row(crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                Container(height:5,width:40,decoration: BoxDecoration(color: Colors.grey,borderRadius: BorderRadius.circular(20),))
-                    ]
-                  ),
-                  SizedBox(height:10),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Transactions",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w600)),
-                        Icon(Icons.tune,
-                            color: Colors.black, size: 25.0, weight: 30),
-                      ]),
-                  ListView.builder(
-                    padding: EdgeInsets.all(10.0),
-                    shrinkWrap: true,
-                    //itemCount: model.length,
-                    itemCount: 4,
-                    itemBuilder: (BuildContext context, int index) {
-                      return TransactionListItem(context, index);
-                    },
-                  )
-                ],
-              ),
-            ),
-            borderRadius: radius,
-            body: Container(
-              decoration: BoxDecoration(color: Colors.grey[50]),
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Hi, $fullName",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                          CircleAvatar(
-                            radius: 20,
-                            backgroundImage: AssetImage(
-                              "assets/images/ella.jpg",
-                            ),
-                          ),
-                        ]),
-                    SizedBox(height: 30),
-                    Text("Total Balance",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text.rich(
-                            style: TextStyle(
-                                fontFamily: "Satoshi",
-                                fontSize: 30,
-                                fontWeight: FontWeight.w600),
-                            TextSpan(
-                                text: '\$ 42,012',
-                                children: const <TextSpan>[
-                                  TextSpan(
-                                    text: '.25',
-                                    style: TextStyle(color: Color(0xFFcbcbcb)),
-                                  )
-                                ]),
-                          ),
-                          Wrap(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(10),
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFf2f2f2),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Center(
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.black,
-                                    size: 15.0,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 20),
-                              Container(
-                                padding: EdgeInsets.all(10),
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFf2f2f2),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Center(
-                                  child: Icon(
-                                    Icons.filter_center_focus,
-                                    color: Colors.black,
-                                    size: 15.0,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        ]),
-                    SizedBox(height: 20),
-                    Container(
-                      padding: const EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                          color: primaryGreen,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width: 40,
-                                  child: Image.asset(
-                                    "assets/images/mastercard-black.png",
-                                  ),
-                                ),
-                                Transform.rotate(
-                                  angle: math.pi / 6,
-                                  child: IconButton(
-                                    icon: Icon(
-                                      Icons.rss_feed,
-                                      color: Colors.black,
-                                    ),
-                                    onPressed: null,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20),
-                            Text("Debit Card",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 20,
-                                  color: bankCardLight,
-                                )),
-                            Text(
-                              "1423 2832 8398 8432 ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w800, fontSize: 24),
-                            ),
-                            SizedBox(height: 40),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Name",
-                                  style: TextStyle(color: bankCardLight),
-                                ),
-                                Text(
-                                  "Exp Date",
-                                  style: TextStyle(color: bankCardLight),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  fullName,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20),
-                                ),
-                                Text(
-                                  "06.28",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20),
-                                ),
-                              ],
-                            ),
-                          ]),
-                    ),
-                    SizedBox(height: 40),
-                  ],
-                ),
-              ),
-            ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: navBarBackgroundColor,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: activeBottomNavColor,
+          unselectedItemColor: inactiveBottomNavColor,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          unselectedLabelStyle: TextStyle(
+            color: inactiveBottomNavColor,
+            fontSize: 10,
+            fontWeight: FontWeight.w400,
           ),
+          selectedLabelStyle: TextStyle(
+            color: activeBottomNavColor,
+            fontSize: 10,
+            fontWeight: FontWeight.w700,
+          ),
+          selectedIconTheme: IconThemeData(color: activeBottomNavColor),
+          currentIndex: _selectedIndex,
+          onTap: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
+            BottomNavigationBarItem(
+                label: "Statistics", icon: Icon(Icons.bar_chart)),
+            BottomNavigationBarItem(label: "Support", icon: Icon(Icons.forum)),
+            BottomNavigationBarItem(
+                label: "Settings", icon: Icon(Icons.settings)),
+          ],
+        ),
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: _screens,
         ));
   }
 }

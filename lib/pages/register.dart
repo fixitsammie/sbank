@@ -3,10 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:sbank/constants.dart';
 import 'package:sbank/providers/auth.dart';
 import 'package:sbank/util/widgets.dart';
-import 'package:flutter_stack_toast/flutter_stack_toast.dart';
 
 class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+  const Register({super.key});
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -16,7 +15,7 @@ class _RegisterState extends State<Register> {
   final formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
-  String _name='', _email = '', _password = '', _confirmPassword = '';
+  String _name = '', _email = '', _password = '', _confirmPassword = '';
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
     foregroundColor: Colors.white,
     minimumSize: const Size(88, 44),
@@ -31,7 +30,7 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     AuthProvider auth = Provider.of<AuthProvider>(context);
 
- final nameField = TextFormField(
+    final nameField = TextFormField(
       autofocus: false,
       validator: (value) =>
           value!.length < 3 ? "Username length is less than 3" : null,
@@ -41,15 +40,13 @@ class _RegisterState extends State<Register> {
     final emailField = TextFormField(
       autofocus: false,
       validator: (value) =>
-      !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-      .hasMatch(value.toString()) ? "Invalid email"
-          : null,
+          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                  .hasMatch(value.toString())
+              ? "Invalid email"
+              : null,
       onSaved: (value) => _email = value.toString(),
       decoration: simpleInputDecoration("Confirm password"),
     );
-
-
-  
 
     final passwordField = TextFormField(
       autofocus: false,
@@ -67,9 +64,9 @@ class _RegisterState extends State<Register> {
       decoration: simpleInputDecoration("Confirm password"),
     );
 
-    var loading = Row(
+    var loading = const Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const <Widget>[
+      children: <Widget>[
         CircularProgressIndicator(),
         Text(" Registering ... Please wait")
       ],
@@ -93,33 +90,31 @@ class _RegisterState extends State<Register> {
       ],
     );
 
-    handleRegister() async{
+    handleRegister() async {
       final form = formKey.currentState;
       if (form != null && form.validate()) {
         form.save();
 
-       
+        setState(() => isLoading = true);
 
-      setState(() => isLoading = true);
+        String? errorMessage = await auth.register(_name, _email, _password);
 
-    String? errorMessage = await auth.register(
-      _name,_email,_password
-    );
+        setState(() => isLoading = false);
 
-    setState(() => isLoading = false);
-
-    if (errorMessage == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("User registered successfully!")),
-      );
-      Future.delayed(Duration(seconds: 2), () { Navigator.pushReplacementNamed(context, '/login');
-         });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(errorMessage)),
-      );
+        if (errorMessage == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("User registered successfully!")),
+          );
+          Future.delayed(const Duration(seconds: 2), () {
+            Navigator.pushReplacementNamed(context, '/login');
+          });
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(errorMessage)),
+          );
+        }
+      }
     }
-    }}
 
     return SafeArea(
       child: Scaffold(
@@ -142,7 +137,7 @@ class _RegisterState extends State<Register> {
                   const SizedBox(height: 30.0),
                   Text("Register", style: pageHeader),
                   const SizedBox(height: 10.0),
-                   label("Full Name"),
+                  label("Full Name"),
                   const SizedBox(height: 5.0),
                   nameField,
                   const SizedBox(height: 15.0),

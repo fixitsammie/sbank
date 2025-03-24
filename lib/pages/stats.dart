@@ -13,15 +13,7 @@ class _StatsState extends State<Stats> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Mybottom(num: 1),
-        body: SafeArea(
-          child:(
-Container(
-child:Center(
-  child:Text("Stats")
-)
-)
-          )
-    ));
+        bottomNavigationBar: Mybottom(num: 1),
+        body: const SafeArea(child: Center(child: Text("Stats"))));
   }
 }
