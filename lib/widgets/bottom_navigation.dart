@@ -21,24 +21,27 @@ class MyBottomNavBar extends State<Mybottom> {
     var _url;
     switch (_selectedIndex) {
       case 0:
-        _url = '/dashboard';
+        _url = '/';
         break;
 
       case 1:
-        _url = '/help';
+        _url = '/stats';
         break;
 
       case 2:
-        _url = '/settings';
+        _url = '/support';
         break;
          case 3:
         _url = '/settings';
         break;
 
       default:
-        _url = '/dashboard';
+        _url = '/';
     }
     Navigator.pushReplacementNamed(context, _url);
+
+
+
   }
 
   @override

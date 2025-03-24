@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sbank/firebase_options1.dart';
 import 'package:sbank/pages/authguard.dart';
-import 'package:sbank/pages/help.dart';
+import 'package:sbank/pages/support.dart';
 import 'package:sbank/pages/homepage.dart';
 import 'package:sbank/pages/localpage.dart';
 import 'package:sbank/pages/network.dart';
 import 'package:sbank/pages/settings.dart';
+import 'package:sbank/pages/stats.dart';
 import 'package:sbank/pages/user_dashboard.dart';
 import 'package:sbank/pages/login.dart';
 import 'package:sbank/pages/register.dart';
@@ -49,7 +50,8 @@ class MainApp extends StatelessWidget {
             '/search': (context) => const Network(),
             '/chat': (context) => const Network(),
             '/settings': (context) => const Settings(),
-            '/help': (context) => const Help(),
+            '/stats': (context) => const Stats(),
+            '/support': (context) => const Support(),
           }),
     );
   }

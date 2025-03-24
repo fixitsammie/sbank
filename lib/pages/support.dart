@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
-class Help extends StatelessWidget {
-  const Help({Key? key}) : super(key: key);
+import '../widgets/bottom_navigation.dart';
+
+class Support extends StatelessWidget {
+  const Support({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       bottomNavigationBar: Mybottom(num: 2),
         body: Column(
       children: [
         Row(
           children: [
-            Text("Help center"),
+            Text("Support center"),
             Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -50,13 +53,13 @@ class Help extends StatelessWidget {
         Row(children: [
           CircleAvatar(child: Text('avi')),
           Column(
-            children: [Text("Support center"), Text('How can we help you?')],
+            children: [Text("Support center"), Text('How can we Support you?')],
           )
         ]),
         Row(children: [
           CircleAvatar(child: Text('avi')),
           Column(
-            children: [Text("Support center"), Text('How can we help you?')],
+            children: [Text("Support center"), Text('How can we Support you?')],
           ),
           Container(
               decoration: BoxDecoration(

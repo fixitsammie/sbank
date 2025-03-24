@@ -3,6 +3,8 @@ import 'package:sbank/pages/dashboard.dart';
 import 'package:provider/provider.dart';
 import 'package:sbank/providers/auth.dart';
 
+import '../widgets/bottom_navigation.dart';
+
 class Settings extends StatelessWidget {
   const Settings({super.key});
 
@@ -10,9 +12,10 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
+      bottomNavigationBar: Mybottom(num: 3),
       body:SafeArea(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [
        
-       LogoutButton(),
+       Center(child:LogoutButton()),
         
       ],),)
     );
@@ -38,13 +41,9 @@ class _LogoutButtonState extends State<LogoutButton> {
   @override
   Widget build(BuildContext context) {
 
-
-    return  TextButton(
-                        style: LoginButtonStyle,
-                        onPressed: _handleLogout,
-                        child: const Text("Logout",
-                            style: TextStyle(fontWeight: FontWeight.w300))
-                      );
+    return   const Text("Logout",
+                                    style: TextStyle(fontWeight: FontWeight.w300));
+   
    
   }
 }
